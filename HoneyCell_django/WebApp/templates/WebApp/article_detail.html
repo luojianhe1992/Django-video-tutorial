@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "WebApp/css/bootstrap.css" %}" type="text/css">
+    <link rel="stylesheet" href="{% static "WebApp/css/result.css" %}" type="text/css">
+    <script src="{% static "WebApp/js/d3.min.js" %}"></script>
+    <script src="{% static "WebApp/js/dimple.v2.1.6.min.js" %}"></script>
+</head>
+
+<body>
+<div id="nav">
+    <div id="logo">
+        <a href="{% url 'index' %}"><img src="{% static "WebApp/img/logo.jpeg" %}" alt="logo"></a>
+    </div>
+    <ul id="navi">
+        <li class="navMenu"><a href="{% url 'honeycell' %}">HoneyCell</a></li>
+        <li class="navMenu"><a href="{% url 'upload' %}">New Task</a></li>
+        <li class="navMenu"><a href="{% url 'preprocess' %}">Preprocessing</a></li>
+        <li class="navMenu"><a href="{% url 'analytics' %}">Analytics</a></li>
+        <li class="navMenu"><a href="{% url 'visualization' %}">Visualization</a></li>
+        <li class="navMenu"><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+</div>
+
+<h2 class="log"> Hello {{ user }} </h2>
+
+<br>
+
+<div class="container">
+    <div class="row" align="center">
+
+        <div class="table-responsive">
+            <table class="table table-hover" border="2" style="text-align: left">
+                <thead>
+                <tr>
+                    <th colspan="2"><h2 align="center">This is the detail for <i>{{ article.title }}</i> by <i>{{ article.user }}</i></h2></th>
+                </tr>
+                </thead>
+                <tbody>
+                <col width="50%">
+                <col width="50%">
+                <tr>
+                    <td><label>Article user: </label></td>
+                    <td>{{ article.user }}</td>
+                </tr>
+                <tr>
+                    <td><label>Article title: </label></td>
+                    <td>{{ article.title }}</td>
+                </tr>
+                <tr>
+                    <td><label>Article body: </label></td>
+                    <td>{{ article.body }}</td>
+                </tr>
+                <tr>
+                    <td><label>Article like: </label></td>
+                    <td>{{ article.like }}</td>
+                </tr>
+                <tr>
+                    <td><label>Article date created: </label></td>
+                    <td>{{ article.date_created }}</td>
+                </tr>
+                <tr>
+                    <td><label>Article date changed: </label></td>
+                    <td>{{ article.date_changed }}</td>
+                </tr>
+
+                </tbody>
+                <tr>
+
+                    <td>
+                        <a href=""><button>Delete the foo</button></a>
+                    </td>
+                    <td>
+                        <a href=""><button>Edit the book</button></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h3 align="center"><a href="{% url 'like_article' article.id %}"><button>Like this article</button></a></h3>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <hr>
+
+        <h2 align="center"><a href="{% url 'show_articles' %}"><button>Show all articles</button></a></h2>
+
+        <hr>
+
+        <h2 align="center"><a href="{% url 'message' %}"><button>Back to message page</button></a></h2>
+
+        <hr>
+
+
+    </div>
+</div>
+
+<h3>
+    Welcome to HoneyCell WebServer!
+</h3>
+<form method="get" action="{% url 'logout' %}">{% csrf_token %}
+    <p>
+        <button type="submit">Log Out</button>
+    </p>
+</form>
+
+</body>
+</html>
+
